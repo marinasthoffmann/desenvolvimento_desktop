@@ -1,0 +1,34 @@
+/target/
+/nbproject/
+
+# NetBeans specific #
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+nbactions.xml
+nb-configuration.xml
+
+
+
+# Class Files #
+*.class
+
+
+
+# Package Files #
+*.war
+*.ear
+*.jar
+/AulaCrudJdbc/nbproject/private/
+/JavaWithMaven/target/
+/AUla_hibernate/nbproject/
+/AUla_hibernate/target/
+/Aula_hibernate/nbproject/
+/Aula_hibernate/target/
+/Avaliacao1/nbproject/private/
+
+
+
+.idea/
