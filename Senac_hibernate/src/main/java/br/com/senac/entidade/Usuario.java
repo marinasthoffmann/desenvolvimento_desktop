@@ -35,6 +35,11 @@ public class Usuario implements Serializable {
     @Temporal(TemporalType.DATE)
     @Column(name = "ultimo_acesso")
     private Date ultimoAcesso;
+   
+    // quando se tem apenas um objeto sempre é ToOne
+    @ManyToOne
+    @JoinColumn(name = "id_perfil") //não é obrigatório quando é unidirecional..hibernate faz sozinho perfil_id
+    private Perfil perfil;
 
     public Usuario() {
     }
@@ -83,6 +88,14 @@ public class Usuario implements Serializable {
 
     public void setUltimoAcesso(Date ultimoAcesso) {
         this.ultimoAcesso = ultimoAcesso;
+    }
+
+    public Perfil getPerfil() {
+        return perfil;
+    }
+
+    public void setPerfil(Perfil perfil) {
+        this.perfil = perfil;
     }
 
     @Override

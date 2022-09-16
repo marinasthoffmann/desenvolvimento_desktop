@@ -6,12 +6,11 @@
 package br.com.senac.dao;
 
 import br.com.senac.entidade.Perfil;
+import br.com.senac.entidade.Usuario;
+import static br.com.senac.util.Gerador.gerarSenha;
 import java.util.List;
 import org.hibernate.Session;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
+import org.hibernate.query.Query;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -21,70 +20,69 @@ import static org.junit.Assert.*;
  */
 public class PerfilDaoImplTest {
     
+    private Perfil perfil;
+    private PerfilDao perfilDao;
+    private Session sessao;
+    
     public PerfilDaoImplTest() {
+        perfilDao = new PerfilDaoImpl();
     }
     
-    @BeforeClass
-    public static void setUpClass() {
+    //@Test
+    public void testSalvar() {
+        System.out.println("salvar");
+        perfil = new Perfil(gerarSenha(7), "bla bla bla ....");
+        sessao = HibernateUtil.abrirConexao();
+        perfilDao.salvarOuAlterar(perfil, sessao);
+        sessao.close();
+        assertNotNull(perfil.getId());              
     }
     
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
-    }
-
-    /**
-     * Test of pesquisarPorId method, of class PerfilDaoImpl.
-     */
-    @Test
+//    @Test
     public void testPesquisarPorId() {
         System.out.println("pesquisarPorId");
-        Long id = null;
-        Session sessao = null;
-        PerfilDaoImpl instance = new PerfilDaoImpl();
-        Perfil expResult = null;
-        Perfil result = instance.pesquisarPorId(id, sessao);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
-    /**
-     * Test of pesquisarPorNome method, of class PerfilDaoImpl.
-     */
-    @Test
+//    @Test
     public void testPesquisarPorNome() {
         System.out.println("pesquisarPorNome");
-        String nome = "";
-        Session sessao = null;
-        PerfilDaoImpl instance = new PerfilDaoImpl();
-        List<Perfil> expResult = null;
-        List<Perfil> result = instance.pesquisarPorNome(nome, sessao);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
-    /**
-     * Test of pesquisarTodos method, of class PerfilDaoImpl.
-     */
     @Test
     public void testPesquisarTodos() {
         System.out.println("pesquisarTodos");
-        Session sessao = null;
-        PerfilDaoImpl instance = new PerfilDaoImpl();
-        List<Perfil> expResult = null;
-        List<Perfil> result = instance.pesquisarTodos(sessao);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        buscarPerfilBd();
+        sessao = HibernateUtil.abrirConexao();
+        List<Perfil> perfis = perfilDao
+                                .pesquisarTodos(sessao);
+        sessao.close();
+        mostrar(perfis);
+        assertTrue(!perfis.isEmpty());
+    }
+    
+    private void mostrar(List<Perfil> perfis) {
+        
+        perfis.stream()                
+                .forEach(perf ->{
+            System.out.println("ID " + perf.getId());
+            System.out.println("Nome " + perf.getNome());
+            System.out.println("Descrição " + perf.getDescricao());
+        });
+    }
+    
+    public Perfil buscarPerfilBd() {
+        sessao = HibernateUtil.abrirConexao();
+        Query<Perfil> consulta = sessao
+                .createQuery("from Perfil p"); //HQL
+        consulta.setMaxResults(1);
+        List<Perfil> perfis = consulta.getResultList();
+        sessao.close();
+        if (perfis.isEmpty()) {
+            testSalvar();
+        } else {
+            perfil = perfis.get(0);
+        }
+        return perfil;
     }
     
 }
