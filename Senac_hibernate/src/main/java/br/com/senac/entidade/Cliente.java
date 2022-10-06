@@ -32,6 +32,10 @@ public class Cliente implements Serializable {
     
     @Column(nullable = false)
     private double salario;
+    
+    @ManyToOne
+    @JoinColumn(name = "id_profissao") //não é obrigatório quando é unidirecional..hibernate faz sozinho perfil_id
+    private Profissao profissao;
 
     public Cliente() {
     }
@@ -83,7 +87,15 @@ public class Cliente implements Serializable {
     public void setSalario(double salario) {
         this.salario = salario;
     }
+    
+    public Profissao getProfissao() {
+        return profissao;
+    }
 
+    public void setProfissao(Profissao profissao) {
+        this.profissao = profissao;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;

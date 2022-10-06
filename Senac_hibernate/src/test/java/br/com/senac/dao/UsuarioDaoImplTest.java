@@ -5,6 +5,7 @@
  */
 package br.com.senac.dao;
 
+import br.com.senac.entidade.Perfil;
 import br.com.senac.entidade.Usuario;
 import static br.com.senac.util.Gerador.*;
 import java.util.List;
@@ -43,8 +44,11 @@ public class UsuarioDaoImplTest {
 //    @Test
     public void testSalvar() {
         System.out.println("salvar");
+        PerfilDaoImplTest pdit = new PerfilDaoImplTest();
+        Perfil perfil = pdit.buscarPerfilBd();
         usuario = new Usuario(gerarNome(), (gerarLogin() + gerarSenha(4)),
                 gerarSenha(8));
+        usuario.setPerfil(perfil);
         sessao = HibernateUtil.abrirConexao();
         usuarioDao.salvarOuAlterar(usuario, sessao);
         sessao.close();
@@ -67,7 +71,7 @@ public class UsuarioDaoImplTest {
         assertEquals(usuarioPesq.getNome(), usuario.getNome());
     }
 
-//    @Test
+    @Test
     public void testPesquisarPorId() {
         System.out.println("pesquisarPorId");
         buscarUsuarioBd();
@@ -90,7 +94,7 @@ public class UsuarioDaoImplTest {
         
     }
     
-    @Test
+    //@Test
     public void testPesquisarTodos() {
         System.out.println("pesquisarTodos");
         buscarUsuarioBd();

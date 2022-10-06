@@ -6,6 +6,7 @@
 package br.com.senac.dao;
 
 import br.com.senac.entidade.Perfil;
+import br.com.senac.entidade.Profissao;
 import static br.com.senac.util.Gerador.gerarSenha;
 import java.util.List;
 import org.hibernate.Session;
@@ -17,71 +18,73 @@ import static org.junit.Assert.*;
  *
  * @author marina.hoffmann
  */
-public class PerfilDaoImplTest {
+public class ProfissaoDaoImplTest {
     
-    private Perfil perfil;
-    private PerfilDao perfilDao;
+    private Profissao profissao;
+    private ProfissaoDao profissaoDao;
     private Session sessao;
     
-    public PerfilDaoImplTest() {
-        perfilDao = new PerfilDaoImpl();
+    public ProfissaoDaoImplTest() {
+         profissaoDao = new ProfissaoDaoImpl();
     }
     
     //@Test
     public void testSalvar() {
         System.out.println("salvar");
-        perfil = new Perfil(gerarSenha(7), "bla bla bla ....");
+        profissao = new Profissao(gerarSenha(7), "bla bla bla ....");
         sessao = HibernateUtil.abrirConexao();
-        perfilDao.salvarOuAlterar(perfil, sessao);
+        profissaoDao.salvarOuAlterar(profissao, sessao);
         sessao.close();
-        assertNotNull(perfil.getId());              
+        assertNotNull(profissao.getId());              
     }
     
 //    @Test
     public void testPesquisarPorId() {
         System.out.println("pesquisarPorId");
+
     }
 
 //    @Test
     public void testPesquisarPorNome() {
         System.out.println("pesquisarPorNome");
+
     }
 
     @Test
     public void testPesquisarTodos() {
         System.out.println("pesquisarTodos");
-        buscarPerfilBd();
+        buscarProfissaoBd();
         sessao = HibernateUtil.abrirConexao();
-        List<Perfil> perfis = perfilDao
+        List<Profissao> profissoes = profissaoDao
                                 .pesquisarTodos(sessao);
         sessao.close();
-        mostrar(perfis);
-        assertTrue(!perfis.isEmpty());
+        mostrar(profissoes);
+        assertTrue(!profissoes.isEmpty());
     }
     
-    private void mostrar(List<Perfil> perfis) {
+    private void mostrar(List<Profissao> profissoes) {
         
-        perfis.stream()                
-                .forEach(perf ->{
-            System.out.println("ID " + perf.getId());
-            System.out.println("Nome " + perf.getNome());
-            System.out.println("Descrição " + perf.getDescricao());
+        profissoes.stream()                
+                .forEach(prof ->{
+            System.out.println("ID " + prof.getId());
+            System.out.println("Nome " + prof.getNome());
+            System.out.println("Descrição " + prof.getDescricao());
         });
     }
     
-    public Perfil buscarPerfilBd() {
+    public Profissao buscarProfissaoBd() {
         sessao = HibernateUtil.abrirConexao();
-        Query<Perfil> consulta = sessao
-                .createQuery("from Perfil p"); //HQL
+        Query<Profissao> consulta = sessao
+                .createQuery("from Profissao p"); //HQL
         consulta.setMaxResults(1);
-        List<Perfil> perfis = consulta.getResultList();
+        List<Profissao> profissoes = consulta.getResultList();
         sessao.close();
-        if (perfis.isEmpty()) {
+        if (profissoes.isEmpty()) {
             testSalvar();
         } else {
-            perfil = perfis.get(0);
+            profissao = profissoes.get(0);
         }
-        return perfil;
+        return profissao;
     }
     
 }
