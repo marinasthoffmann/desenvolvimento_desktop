@@ -33,28 +33,38 @@ public class CadastroUsuario extends javax.swing.JFrame {
      * Creates new form CadastroUsuario
      */
     public CadastroUsuario() {
-        initComponents();
-        carregarComboPerfil();
+         initComponents();
+         carregarComboPerfil();
     }
-
+    
+    public CadastroUsuario(Usuario usuario) {
+         initComponents();
+         carregarComboPerfil();
+         this.usuario = usuario;
+         varNome.setText(usuario.getNome());
+         varLogin.setText(usuario.getLogin());
+         varComboPerfil.setSelectedItem(usuario.getPerfil().getNome());
+    }      
+        
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblCadastrarUsuario = new javax.swing.JLabel();
+        lblTitulo = new javax.swing.JLabel();
         lblNome = new javax.swing.JLabel();
         lblLogin = new javax.swing.JLabel();
         varNome = new javax.swing.JTextField();
         varLogin = new javax.swing.JTextField();
-        lblLogin1 = new javax.swing.JLabel();
+        lblPerfil = new javax.swing.JLabel();
         btnSalvar = new javax.swing.JButton();
         varComboPerfil = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        lblCadastrarUsuario.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        lblCadastrarUsuario.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblCadastrarUsuario.setText("Cadastrar Usuário");
+        lblTitulo.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTitulo.setText("Cadastrar Usuário");
 
         lblNome.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblNome.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -64,9 +74,9 @@ public class CadastroUsuario extends javax.swing.JFrame {
         lblLogin.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblLogin.setText("Login:");
 
-        lblLogin1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblLogin1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblLogin1.setText("Perfil:");
+        lblPerfil.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblPerfil.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblPerfil.setText("Perfil:");
 
         btnSalvar.setText("Salvar");
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
@@ -81,13 +91,13 @@ public class CadastroUsuario extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblCadastrarUsuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lblTitulo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(52, 52, 52)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(layout.createSequentialGroup()
-                            .addComponent(lblLogin1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(varComboPerfil, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGroup(layout.createSequentialGroup()
@@ -107,7 +117,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(lblCadastrarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lblNome)
@@ -118,7 +128,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
                     .addComponent(varLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblLogin1)
+                    .addComponent(lblPerfil)
                     .addComponent(varComboPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnSalvar)
@@ -230,10 +240,10 @@ public class CadastroUsuario extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSalvar;
-    private javax.swing.JLabel lblCadastrarUsuario;
     private javax.swing.JLabel lblLogin;
-    private javax.swing.JLabel lblLogin1;
     private javax.swing.JLabel lblNome;
+    private javax.swing.JLabel lblPerfil;
+    private javax.swing.JLabel lblTitulo;
     private javax.swing.JComboBox<String> varComboPerfil;
     private javax.swing.JTextField varLogin;
     private javax.swing.JTextField varNome;

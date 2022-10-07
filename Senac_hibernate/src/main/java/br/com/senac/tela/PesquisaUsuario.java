@@ -87,6 +87,11 @@ public class PesquisaUsuario extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tbUsuarios);
 
         btnAlterar.setText("Alterar");
+        btnAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlterarActionPerformed(evt);
+            }
+        });
 
         brnRemover.setText("Remover");
         brnRemover.addActionListener(new java.awt.event.ActionListener() {
@@ -190,6 +195,17 @@ public class PesquisaUsuario extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_brnRemoverActionPerformed
+
+    private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
+        int linhaSelecionada = tbUsuarios.getSelectedRow();
+        if (linhaSelecionada < 0) {
+            JOptionPane.showMessageDialog(null, "Selecione um usuário para alterar!");
+        } else {
+            usuario = usuarios.get(linhaSelecionada);
+            new CadastroUsuario(usuario).setVisible(true);
+            dispose();
+        }
+    }//GEN-LAST:event_btnAlterarActionPerformed
 
     
     private void carregarTabelaUsuario(List<Usuario> usuarios){
